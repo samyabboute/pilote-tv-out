@@ -69,32 +69,31 @@ kbd{font-family:var(--mono);font-size:11px;color:var(--fg-3);background:var(--su
 /* ---------- Sign-in (split screen) ---------- */
 .signin{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 @media (max-width:900px){.signin{grid-template-columns:1fr}.brand-panel{display:none!important}}
-.brand-panel{position:relative;overflow:hidden;color:#fff;padding:44px 52px;display:flex;flex-direction:column;gap:28px;
-  background:radial-gradient(700px 420px at 0% 0%,rgba(59,108,240,.55),transparent 60%),radial-gradient(600px 400px at 100% 100%,rgba(29,78,216,.35),transparent 60%),linear-gradient(160deg,#0f2d66 0%,#0a1f47 55%,#071633 100%)}
-.brand-panel::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.brand-panel{position:relative;overflow:hidden;color:#fff;padding:40px 52px 36px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:100vh;
+  background:#081a3a url("assets/hero.jpg") center 30%/cover no-repeat}
+.brand-panel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,18,42,.55) 0%,rgba(6,18,42,.05) 28%,rgba(6,18,42,.15) 48%,rgba(6,18,42,.88) 78%,rgba(6,18,42,.96) 100%);pointer-events:none}
 .brand-panel > *{position:relative}
 .bp-top{display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.02em}
 .logo-mark{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:var(--brand);color:#fff;flex:none}
-.brand-panel .logo-mark{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2)}
+.brand-panel .logo-mark{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(6px)}
 .logo-mark svg{width:17px;height:17px}
-.bp-tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(214,226,255,.6)}
-.chip-live{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-size:12px;font-weight:600;color:rgba(230,238,255,.9);padding:6px 12px 6px 8px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
-.chip-live i{width:16px;height:16px;border-radius:50%;background:rgba(52,211,153,.25);display:grid;place-items:center}
-.chip-live i::after{content:"";width:7px;height:7px;border-radius:50%;background:#34d399}
-.bp-title{font-size:clamp(34px,3.6vw,46px);line-height:1.05;letter-spacing:-.045em;font-weight:800;color:#fff;max-width:14ch}
-.bp-title span{color:#a9c4ff}
-.bp-sub{color:rgba(214,226,255,.75);font-size:15px;max-width:44ch;margin:-10px 0 0}
-.bp-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-xl);padding:18px 20px;backdrop-filter:blur(8px);max-width:520px}
-.bp-card-h{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.1)}
-.bp-card-h span{font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;background:rgba(169,196,255,.16);color:#c9dbff}
-.bp-row{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px}
-.bp-row:last-child{border-bottom:0;padding-bottom:2px}
-.bp-row b{font-weight:600;color:#fff;display:block}
-.bp-row small{color:rgba(214,226,255,.55);font-size:11.5px}
-.bp-row .ic{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;flex:none}
-.bp-row .ic svg{width:15px;height:15px;color:#a9c4ff}
-.bp-foot{margin-top:auto;font-size:12px;color:rgba(214,226,255,.5)}
+.bp-copy{margin-top:auto;display:grid;gap:16px;max-width:520px}
+.bp-eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#bcd2ff}
+.bp-title{font-family:var(--display);font-size:clamp(34px,3.4vw,48px);line-height:1.04;letter-spacing:-.045em;font-weight:700;color:#fff;text-wrap:balance}
+.bp-sub{color:rgba(226,234,255,.82);font-size:15.5px;line-height:1.6;margin:0;max-width:46ch}
+.bp-facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:0;margin-top:10px;border-top:1px solid rgba(255,255,255,.16);padding-top:18px}
+.bp-facts div{padding-right:28px;margin-right:28px;border-right:1px solid rgba(255,255,255,.16)}
+.bp-facts div:last-child{border-right:0;margin-right:0;padding-right:0}
+.bp-facts b{display:block;font-family:var(--display);font-size:20px;font-weight:700;letter-spacing:-.02em;color:#fff}
+.bp-facts span{font-size:12.5px;color:rgba(214,226,255,.7)}
+.bp-foot{font-size:12px;color:rgba(214,226,255,.55)}
+.lang-wrap{position:absolute;top:22px;right:24px}
+.form-side{position:relative}
+.lang{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:2px;gap:2px;box-shadow:var(--shadow)}
+.lang button{border:0;background:transparent;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--fg-3);padding:5px 10px;border-radius:7px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--brand);color:#fff}
+.top-right{display:flex;align-items:center;gap:10px}
 .form-side{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;gap:18px;
   background:radial-gradient(rgba(12,37,82,.07) 1px,transparent 1px) 0 0/22px 22px,var(--bg)}
 .signin-card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow-md);padding:34px 32px 28px;display:grid;gap:18px;text-align:center}
@@ -112,7 +111,7 @@ kbd{font-family:var(--mono);font-size:11px;color:var(--fg-3);background:var(--su
 .signin-foot{font-size:12px;color:var(--fg-3)}
 .signin-foot b{color:var(--fg-2);font-weight:600}
 .mobile-logo{display:none}
-@media (max-width:900px){.mobile-logo{display:flex;color:var(--fg)}}
+@media (max-width:900px){.mobile-logo{display:flex;color:var(--fg)}.lang-wrap{top:14px;right:14px}}
 
 /* ---------- App shell ---------- */
 .app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
@@ -128,8 +127,8 @@ kbd{font-family:var(--mono);font-size:11px;color:var(--fg-3);background:var(--su
 .side-bottom{margin-top:auto;display:grid;gap:10px}
 .net{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--fg-3);padding:0 10px}
 .net i{width:8px;height:8px;border-radius:50%;background:var(--fg-4);flex:none}
-.net.ok i{background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.18)}
-.net.ko i{background:var(--bad);box-shadow:0 0 0 3px rgba(220,38,38,.15)}
+.net.ok i{background:#10b981}
+.net.ko i{background:var(--bad)}
 .net.ko{color:var(--bad)}
 .user{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);min-width:0}
 .avatar{width:34px;height:34px;border-radius:10px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12.5px;letter-spacing:.02em;flex:none}
@@ -161,7 +160,7 @@ kbd{font-family:var(--mono);font-size:11px;color:var(--fg-3);background:var(--su
   .side-bottom{margin:0 0 0 auto;display:flex;align-items:center;gap:6px}
   .net span{display:none}.net{padding:0}
   .user{padding:4px;border:0;background:transparent}.user-txt{display:none}
-  .topbar{display:none}
+  .topbar{height:auto;padding:8px 16px;position:static}.crumb{display:none}.today-chip{display:none}.topbar{justify-content:flex-end}
   .content{padding:20px 16px}
 }
 
@@ -332,20 +331,21 @@ details.bulk[open] summary{margin-bottom:12px}
   <aside class="brand-panel">
     <div class="bp-top">
       <div class="logo"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2.5"/><path d="M8 21h8M12 17v4"/></svg></span>Pilote TV Out</div>
-      <span class="bp-tag">Rétention TV</span>
     </div>
-    <span class="chip-live"><i></i>En ligne · Données centralisées</span>
-    <div class="bp-title">Chaque client gardé, <span>compté.</span></div>
-    <p class="bp-sub">Saisissez le résultat de chaque demande de résiliation TV. Le taux de rétention du pilote se met à jour en direct pour toute l'équipe.</p>
-    <div class="bp-card">
-      <div class="bp-card-h">Comment ça marche<span>3 étapes</span></div>
-      <div class="bp-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><div><b>Connexion par TAA</b><small>Chaque saisie est enregistrée à votre nom</small></div></div>
-      <div class="bp-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><b>Saisie en 15 secondes</b><small>Retenu ou non, motif, levier proposé</small></div></div>
-      <div class="bp-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><div><b>Résultats en temps réel</b><small>Taux de rétention, motifs, leviers efficaces</small></div></div>
+    <div class="bp-copy">
+      <span class="bp-eyebrow">Programme de rétention TV</span>
+      <div class="bp-title">Garder nos clients devant l'écran.</div>
+      <p class="bp-sub">Chaque demande de résiliation compte. Saisissez le résultat en quelques secondes et suivez en direct ce qui fait rester nos clients.</p>
+      <div class="bp-facts">
+        <div><b>15 s</b><span>par saisie</span></div>
+        <div><b>En direct</b><span>taux de rétention</span></div>
+        <div><b>TAA</b><span>accès nominatif</span></div>
+      </div>
     </div>
     <div class="bp-foot">Créé par Samy ABBOUTE</div>
   </aside>
   <div class="form-side">
+    <div class="lang-wrap"><div class="lang" role="group" aria-label="Langue"><button type="button" data-lang="fr">FR</button><button type="button" data-lang="de">DE</button></div></div>
     <div class="logo mobile-logo"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2.5"/><path d="M8 21h8M12 17v4"/></svg></span>Pilote TV Out</div>
     <div class="signin-card">
       <div class="signin-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
@@ -391,7 +391,7 @@ details.bulk[open] summary{margin-bottom:12px}
   <div class="main">
     <header class="topbar">
       <div class="crumb">Pilote TV Out <span>/</span> <b id="page-title">Saisie</b></div>
-      <span class="today-chip" id="page-date"></span>
+      <div class="top-right"><span class="today-chip" id="page-date"></span><div class="lang" role="group" aria-label="Langue"><button type="button" data-lang="fr">FR</button><button type="button" data-lang="de">DE</button></div></div>
     </header>
     <div class="content">
       <div id="demo-banner" class="banner" hidden>
@@ -576,6 +576,127 @@ details.bulk[open] summary{margin-bottom:12px}
 
 <script>
 (function(){
+/* =================== Langue FR / DE =================== */
+const DE={
+"Programme de rétention TV":"TV-Kundenbindungsprogramm",
+"Garder nos clients devant l'écran.":"Unsere Kunden vor dem Bildschirm halten.",
+"Chaque demande de résiliation compte. Saisissez le résultat en quelques secondes et suivez en direct ce qui fait rester nos clients.":"Jede Kündigungsanfrage zählt. Erfassen Sie das Ergebnis in wenigen Sekunden und verfolgen Sie live, was unsere Kunden bleiben lässt.",
+"par saisie":"pro Erfassung","En direct":"Live","taux de rétention":"Kundenbindungsrate","accès nominatif":"persönlicher Zugang",
+"Créé par Samy ABBOUTE":"Erstellt von Samy ABBOUTE","Pilote TV Out · Créé par":"Pilote TV Out · Erstellt von",
+"Bon retour !":"Willkommen zurück!","Connectez-vous avec votre identifiant TAA":"Melden Sie sich mit Ihrer TAA-Kennung an",
+"Identifiant TAA":"TAA-Kennung","Se connecter →":"Anmelden →","Connexion sécurisée":"Sichere Verbindung","Accès nominatif":"Persönlicher Zugang",
+"Rétention TV":"TV-Kundenbindung","Espace agent":"Agentenbereich","Saisie":"Erfassung","Pilotage":"Steuerung","Tableau de bord":"Dashboard","Utilisateurs":"Benutzer",
+"Connexion…":"Verbindung…","Base connectée":"Datenbank verbunden","Hors ligne":"Offline","Déconnexion":"Abmelden","Langue":"Sprache",
+"Nouvelle saisie":"Neue Erfassung","Demande de résiliation TV":"TV-Kündigungsanfrage",
+"Une saisie par client qui veut résilier sa TV. Elle est enregistrée à votre nom, avec l'heure exacte.":"Eine Erfassung pro Kunde, der sein TV-Abo kündigen möchte. Sie wird mit Ihrem Namen und der genauen Uhrzeit gespeichert.",
+"Le client est-il retenu ?":"Bleibt der Kunde?","O / N":"J / N","Oui, retenu":"Ja, gehalten","Le client garde son abonnement TV":"Der Kunde behält sein TV-Abo",
+"Non, résilié":"Nein, gekündigt","La résiliation est maintenue":"Die Kündigung bleibt bestehen","Résultat":"Ergebnis",
+"Motif de résiliation annoncé":"Genannter Kündigungsgrund","Levier proposé":"Angebotene Massnahme","optionnel":"optional",
+"Remarque":"Bemerkung","optionnel · aucune donnée client":"optional · keine Kundendaten","Ce qui a fait la différence…":"Was den Unterschied gemacht hat…",
+"Enregistrer":"Speichern","Effacer":"Zurücksetzen","Aujourd'hui · toute l'équipe":"Heute · ganzes Team","taux de rétention du jour":"Kundenbindungsrate heute",
+"demandes":"Anfragen","retenus":"gehalten","par vous":"von Ihnen","Vos dernières saisies":"Ihre letzten Erfassungen","Relu depuis la base":"Aus der Datenbank bestätigt",
+"Le pilote fonctionne-t-il ?":"Funktioniert der Pilot?","Part des clients qui voulaient résilier leur TV et qui restent.":"Anteil der Kunden mit Kündigungswunsch, die bleiben.",
+"Aujourd'hui":"Heute","Aujourd’hui":"Heute","7 j":"7 T","30 j":"30 T","Tout":"Alle","Dates":"Zeitraum","Période":"Zeitraum","Du":"Von","Au":"Bis",
+"En attente de données":"Warten auf Daten","Pas encore assez de saisies pour conclure.":"Noch nicht genug Erfassungen für ein Fazit.",
+"Le taux devient fiable à partir d'une trentaine de saisies.":"Die Rate wird ab etwa 30 Erfassungen verlässlich.",
+"Fourchette de fiabilité 95 %":"95-%-Vertrauensbereich","Demandes traitées":"Bearbeitete Anfragen","Clients retenus":"Gehaltene Kunden","Résiliations":"Kündigungen",
+"Vs période précédente":"Vs. Vorperiode","Évolution jour par jour":"Tagesverlauf","Retenus":"Gehalten","Résiliés":"Gekündigt","Taux de rétention":"Kundenbindungsrate",
+"Motifs de résiliation":"Kündigungsgründe","volume · part retenue":"Anzahl · Anteil gehalten","Efficacité des leviers":"Wirksamkeit der Massnahmen",
+"taux de succès quand proposé":"Erfolgsquote, wenn angeboten","Performance par agent":"Leistung pro Agent","classés par taux de rétention":"sortiert nach Kundenbindungsrate",
+"Saisies":"Erfassungen","Taux":"Rate","Motif principal":"Hauptgrund","Dernières saisies":"Letzte Erfassungen","Date":"Datum","Motif":"Grund","Levier":"Massnahme",
+"Mise à jour automatique toutes les 20 secondes.":"Automatische Aktualisierung alle 20 Sekunden.","Exporter en CSV":"Als CSV exportieren",
+"Administration":"Administration","Utilisateurs et accès":"Benutzer und Zugriffe",
+"Les admins accèdent au tableau de bord et à cette page. Un utilisateur désactivé ne peut plus se connecter, ses saisies restent dans les statistiques.":"Admins haben Zugriff auf das Dashboard und diese Seite. Ein deaktivierter Benutzer kann sich nicht mehr anmelden, seine Erfassungen bleiben in der Statistik.",
+"Actifs":"Aktiv","Admins":"Admins","Désactivés":"Deaktiviert","Sans saisie 7 j":"Ohne Erfassung 7 T",
+"Vérification du système":"Systemprüfung","connexion à la base et enregistrement réel":"Datenbankverbindung und echte Speicherung","Base de données":"Datenbank",
+"Temps de réponse":"Antwortzeit","Saisies enregistrées (total)":"Gespeicherte Erfassungen (total)","Dernière saisie reçue":"Letzte empfangene Erfassung",
+"Lancer le test d'enregistrement":"Speichertest starten","Écrit une saisie test, la relit dans la base puis la supprime.":"Schreibt eine Testerfassung, liest sie aus der Datenbank und löscht sie wieder.",
+"Ajouter un utilisateur":"Benutzer hinzufügen","tous les champs marqués * sont obligatoires":"alle mit * markierten Felder sind Pflicht",
+"Prénom":"Vorname","Nom":"Name","Rôle":"Rolle","Ajouter":"Hinzufügen","Import en masse":"Massenimport","Une ligne par utilisateur :":"Eine Zeile pro Benutzer:",
+"(rôle = agent ou admin, agent par défaut). Les TAA existants sont mis à jour.":"(Rolle = agent oder admin, standardmässig agent). Bestehende TAA werden aktualisiert.",
+"Importer":"Importieren","Rechercher un nom ou un TAA":"Name oder TAA suchen","Statut":"Status","Dernière saisie":"Letzte Erfassung",
+"Prix trop élevé":"Preis zu hoch","Passage au streaming (Netflix, Disney+…)":"Wechsel zu Streaming (Netflix, Disney+…)","Offre d’un concurrent":"Angebot eines Mitbewerbers",
+"Ne regarde plus la TV":"Schaut kein TV mehr","Problèmes techniques / qualité":"Technische Probleme / Qualität","Contenu manquant (sport, chaînes)":"Fehlende Inhalte (Sport, Sender)",
+"Déménagement":"Umzug","Changement de ménage / décès":"Haushaltsänderung / Todesfall","Autre motif":"Anderer Grund",
+"Remise temporaire":"Befristeter Rabatt","Abonnement plus léger":"Günstigeres Abo","Option / contenu offert":"Option / Inhalt geschenkt","Résolution technique":"Technische Lösung",
+"Offre combinée":"Kombiangebot","Aucun levier":"Keine Massnahme","Choisir un motif…":"Grund wählen…",
+"Choisissez le motif.":"Wählen Sie den Grund.","Prêt · touche Entrée pour enregistrer":"Bereit · Enter zum Speichern",
+"Trop d’essais. Patientez quelques secondes.":"Zu viele Versuche. Bitte warten Sie einige Sekunden.","Saisissez votre identifiant TAA complet.":"Geben Sie Ihre vollständige TAA-Kennung ein.",
+"Vérification…":"Überprüfung…","Trop d’erreurs de TAA depuis ce poste. Réessayez dans 15 minutes.":"Zu viele falsche TAA von diesem Arbeitsplatz. Versuchen Sie es in 15 Minuten erneut.",
+"Serveur injoignable. Vérifiez votre connexion internet.":"Server nicht erreichbar. Prüfen Sie Ihre Internetverbindung.",
+"TAA inconnu ou désactivé. Vérifiez la saisie ou contactez votre responsable.":"TAA unbekannt oder deaktiviert. Prüfen Sie die Eingabe oder wenden Sie sich an Ihre Führungskraft.",
+"Connexion impossible. Vérifiez votre connexion internet.":"Anmeldung nicht möglich. Prüfen Sie Ihre Internetverbindung.",
+"Déconnecté":"Abgemeldet","Déconnexion automatique après 45 minutes d’inactivité":"Automatische Abmeldung nach 45 Minuten Inaktivität",
+"Configuration manquante.":"Konfiguration fehlt.","Renseignez l’URL et la clé Supabase dans le fichier config.js.":"Tragen Sie URL und Supabase-Schlüssel in config.js ein.",
+"Connexion à la base impossible.":"Keine Verbindung zur Datenbank.","Vérifiez la connexion internet. Les données se rechargeront automatiquement.":"Prüfen Sie die Internetverbindung. Die Daten werden automatisch neu geladen.",
+"Le pilote démarre.":"Der Pilot startet.","Les chiffres apparaissent dès la première saisie d’un agent.":"Die Zahlen erscheinen ab der ersten Erfassung eines Agenten.",
+"Client retenu · enregistré":"Kunde gehalten · gespeichert","Résiliation enregistrée":"Kündigung gespeichert",
+"Pas de connexion : saisie gardée, elle sera envoyée automatiquement":"Keine Verbindung: Erfassung gespeichert, sie wird automatisch gesendet",
+"Votre TAA n’est plus actif. Contactez votre responsable.":"Ihre TAA ist nicht mehr aktiv. Wenden Sie sich an Ihre Führungskraft.",
+"Une saisie en attente a été refusée par le serveur":"Eine wartende Erfassung wurde vom Server abgelehnt","Enregistrement…":"Speichern…",
+"Saisie annulée":"Erfassung storniert","Délai d’annulation dépassé":"Stornofrist abgelaufen","Annulation impossible":"Stornierung nicht möglich","Annuler":"Stornieren","Confirmer ?":"Bestätigen?",
+"Vos saisies apparaîtront ici dès l’enregistrement.":"Ihre Erfassungen erscheinen hier, sobald sie gespeichert sind.",
+"7 derniers jours":"Letzte 7 Tage","30 derniers jours":"Letzte 30 Tage","Depuis le début du pilote":"Seit Pilotstart","Période personnalisée":"Eigener Zeitraum",
+"Aucune saisie sur cette période.":"Keine Erfassungen in diesem Zeitraum.","Choisissez une autre période ou attendez les premières saisies.":"Wählen Sie einen anderen Zeitraum oder warten Sie auf die ersten Erfassungen.",
+"Échantillon encore petit":"Stichprobe noch klein","pas de période de comparaison":"kein Vergleichszeitraum","stable vs période préc.":"stabil vs. Vorperiode","vs période préc.":"vs. Vorperiode",
+"non applicable sur « Tout »":"nicht anwendbar bei «Alle»","pas de données avant":"keine früheren Daten",
+"Aucun motif sur cette période.":"Keine Gründe in diesem Zeitraum.","Aucun levier renseigné sur cette période.":"Keine Massnahmen in diesem Zeitraum erfasst.",
+"Moins de 10 essais : à confirmer":"Weniger als 10 Versuche: zu bestätigen","Aucun agent sur cette période.":"Keine Agenten in diesem Zeitraum.","supprimé":"gelöscht",
+"Retenu":"Gehalten","Résilié":"Gekündigt","Supprimer":"Löschen","Confirmer":"Bestätigen","Suppression impossible":"Löschen nicht möglich","Saisie supprimée":"Erfassung gelöscht",
+"(vous)":"(Sie)","Actif":"Aktiv","Désactivé":"Deaktiviert","Modifier":"Bearbeiten","Désactiver":"Deaktivieren","Réactiver":"Reaktivieren",
+"Changer le TAA rattache aussi ses saisies.":"Eine TAA-Änderung überträgt auch die Erfassungen.","Aucun agent ne correspond à la recherche.":"Kein Benutzer entspricht der Suche.",
+"Aucun agent. Ajoutez le premier ci-dessus.":"Keine Benutzer. Fügen Sie oben den ersten hinzu.","Le TAA doit contenir 4 à 20 lettres ou chiffres.":"Die TAA muss 4 bis 20 Buchstaben oder Ziffern enthalten.",
+"Agent mis à jour":"Benutzer aktualisiert","Vous ne pouvez pas désactiver votre propre compte":"Sie können Ihr eigenes Konto nicht deaktivieren",
+"TAA invalide : 4 à 20 lettres ou chiffres":"Ungültige TAA: 4 bis 20 Buchstaben oder Ziffern","Prénom et nom obligatoires":"Vorname und Name sind Pflicht",
+"Il doit rester au moins un admin actif.":"Es muss mindestens ein aktiver Admin bleiben.","Vous ne pouvez pas supprimer votre propre compte.":"Sie können Ihr eigenes Konto nicht löschen.",
+"Accès réservé aux admins.":"Zugriff nur für Admins.","Prénom et nom obligatoires.":"Vorname und Name sind Pflicht.","TAA invalide : 4 à 20 lettres ou chiffres.":"Ungültige TAA: 4 bis 20 Buchstaben oder Ziffern.",
+"Ce TAA existe déjà.":"Diese TAA existiert bereits.","Format invalide : TAA en lettres et chiffres (4 à 20), nom de 2 à 80 caractères.":"Ungültiges Format: TAA aus Buchstaben und Ziffern (4–20), Name 2–80 Zeichen.",
+"Opération impossible. Vérifiez la connexion et vos droits.":"Vorgang nicht möglich. Prüfen Sie Verbindung und Berechtigungen.",
+"Aucune ligne valide. Format attendu : TAA;Prénom;Nom;Rôle":"Keine gültige Zeile. Erwartetes Format: TAA;Vorname;Name;Rolle",
+"● Connectée":"● Verbunden","● Injoignable":"● Nicht erreichbar","aucune":"keine",
+"Écriture d’une saisie test dans la base":"Testerfassung in die Datenbank schreiben","Relecture de la saisie depuis la base":"Erfassung aus der Datenbank lesen",
+"Suppression de la saisie test":"Testerfassung löschen","saisie introuvable":"Erfassung nicht gefunden","pas d’identifiant":"keine Kennung",
+"à supprimer à la main (remarque « [TEST AUTOMATIQUE] »)":"manuell löschen (Bemerkung «[TEST AUTOMATIQUE]»)",
+"Test réussi : les saisies sont bien enregistrées":"Test erfolgreich: Erfassungen werden korrekt gespeichert","Test en échec : voir le détail":"Test fehlgeschlagen: siehe Details",
+"prénom":"Vorname","nom":"Name",
+/* phrases avec variables */
+"Bienvenue {name}":"Willkommen {name}","Bonjour {name}, nouvelle demande ?":"Hallo {name}, neue Anfrage?",
+"1 saisie en attente d’envoi : envoi automatique dès que la connexion revient.":"1 Erfassung wartet auf Versand: automatischer Versand, sobald die Verbindung zurück ist.",
+"{n} saisies en attente d’envoi : envoi automatique dès que la connexion revient.":"{n} Erfassungen warten auf Versand: automatischer Versand, sobald die Verbindung zurück ist.",
+"1 saisie en attente envoyée":"1 wartende Erfassung gesendet","{n} saisies en attente envoyées":"{n} wartende Erfassungen gesendet",
+"Le serveur a refusé la saisie ({m}). Réessayez.":"Der Server hat die Erfassung abgelehnt ({m}). Bitte erneut versuchen.","Connexion impossible ({m}).":"Anmeldung nicht möglich ({m}).",
+"{p} des clients qui voulaient résilier restent.":"{p} der Kunden mit Kündigungswunsch bleiben.",
+"{k} abonnements TV sauvés sur {n} demandes. Avec moins de 30 saisies, le vrai taux peut se situer entre {lo} % et {hi} % : attendez avant de conclure.":"{k} TV-Abos gerettet bei {n} Anfragen. Mit weniger als 30 Erfassungen kann die echte Rate zwischen {lo} % und {hi} % liegen: Warten Sie mit einem Fazit.",
+"Chiffre fiable · ±{m} pts":"Verlässliche Zahl · ±{m} Pkt.",
+"{k} abonnements TV sauvés sur {n} demandes. Le vrai taux de rétention se situe entre {lo} % et {hi} %.":"{k} TV-Abos gerettet bei {n} Anfragen. Die echte Kundenbindungsrate liegt zwischen {lo} % und {hi} %.",
+"Fourchette 95 % : {lo}–{hi} %":"95-%-Bereich: {lo}–{hi} %","{p} sur la période précédente":"{p} in der Vorperiode","{d} pts":"{d} Pkt.",
+"{p} % retenus":"{p} % gehalten","25 plus récentes sur {n}":"25 neueste von {n}","1 saisie":"1 Erfassung","{n} saisies":"{n} Erfassungen",
+"{d} · {n} résiliés":"{d} · {n} gekündigt","{d} · {n} retenus":"{d} · {n} gehalten","{d} · {p} % sur {n} demandes":"{d} · {p} % bei {n} Anfragen",
+"{name} ajouté":"{name} hinzugefügt","{name} ajouté comme admin":"{name} als Admin hinzugefügt","{name} désactivé":"{name} deaktiviert","{name} réactivé":"{name} reaktiviert",
+"{name} supprimé · ses saisies sont conservées":"{name} gelöscht · Erfassungen bleiben erhalten","Champs obligatoires manquants : {f}.":"Fehlende Pflichtfelder: {f}.",
+"{n} utilisateur(s) importé(s)":"{n} Benutzer importiert"," · {b} ligne(s) ignorée(s)":" · {b} Zeile(n) ignoriert",
+"enregistrée à {t} au nom de {n}":"gespeichert um {t} für {n}",
+"Heure":"Zeit","Agent":"Agent","Admin":"Admin"
+};
+let LANG=(()=>{try{return localStorage.getItem('tvout.lang')}catch(e){return null}})()||((navigator.language||'').toLowerCase().startsWith('de')?'de':'fr');
+const LOC=()=>LANG==='de'?'de-CH':'fr-CH';
+function t(fr,vars){let s=(LANG==='de'&&DE[fr]!=null)?DE[fr]:fr;if(vars)s=s.replace(/\{(\w+)\}/g,(m,k)=>vars[k]!=null?vars[k]:m);return s}
+function trNode(n){
+  if(n.nodeType===3){
+    const raw=n.__fr!=null?n.__fr:n.nodeValue,k=raw.trim();
+    if(!k||DE[k]==null)return;
+    n.__fr=raw;const out=LANG==='de'?raw.replace(k,DE[k]):raw;
+    if(n.nodeValue!==out)n.nodeValue=out;return;
+  }
+  if(n.nodeType!==1||n.tagName==='SCRIPT'||n.tagName==='STYLE')return;
+  for(const a of ['placeholder','title','aria-label']){
+    if(!n.hasAttribute(a))continue;const key='__fr_'+a,raw=n[key]!=null?n[key]:n.getAttribute(a);
+    if(DE[raw.trim()]==null)continue;n[key]=raw;n.setAttribute(a,LANG==='de'?DE[raw.trim()]:raw);
+  }
+  for(const c of n.childNodes)trNode(c);
+}
+new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)trNode(n)}).observe(document.body,{childList:true,subtree:true});
+
 const CFG=window.TVOUT_CONFIG||{};
 const REASONS=[
   {id:'prix',label:'Prix trop élevé'},
@@ -605,8 +726,8 @@ const pad=n=>String(n).padStart(2,'0');
 const dayKey=t=>{const d=new Date(t);return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
 const startOfDay=t=>{const d=new Date(t);d.setHours(0,0,0,0);return d.getTime()};
 const fmtPct=x=>x==null||isNaN(x)?'–':Math.round(x*100)+' %';
-const fmtTime=t=>new Date(t).toLocaleTimeString('fr-CH',{hour:'2-digit',minute:'2-digit'});
-const fmtDate=t=>new Date(t).toLocaleDateString('fr-CH',{day:'numeric',month:'short'})+' '+fmtTime(t);
+const fmtTime=t=>new Date(t).toLocaleTimeString(LOC(),{hour:'2-digit',minute:'2-digit'});
+const fmtDate=t=>new Date(t).toLocaleDateString(LOC(),{day:'numeric',month:'short'})+' '+fmtTime(t);
 const normTaa=s=>String(s||'').toUpperCase().replace(/\s+/g,'');
 function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
 function ss(k,v){try{if(v===undefined)return sessionStorage.getItem(k);if(v===null)sessionStorage.removeItem(k);else sessionStorage.setItem(k,v)}catch(e){return null}}
@@ -639,7 +760,7 @@ function setView(v){
   for(const id of ['saisie','dashboard','admin']){const b=$('nav-'+id);if(id===shown)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')}
   $('nav-admin-group').hidden=!isAdmin();
   S.view=shown==='taa'?v:shown;
-  if(TITLES[shown]){$('page-title').textContent=TITLES[shown];document.title=TITLES[shown]+' · Pilote TV Out'}else document.title='Pilote TV Out';
+  if(TITLES[shown]){$('page-title').textContent=TITLES[shown];document.title=t(TITLES[shown])+' · Pilote TV Out'}else document.title='Pilote TV Out';
   try{history.replaceState(null,'','#'+v)}catch(e){}
   renderWho();renderBanner();
   if(shown==='taa')setTimeout(()=>$('taa').focus(),30);
@@ -654,7 +775,7 @@ function renderWho(){
   $('u-avatar').textContent=((parts[0]||'')[0]||'')+((parts[parts.length-1]||'')[0]||'');
   $('u-name').textContent=S.agent.nom;
   const r=$('u-role');r.textContent=isAdmin()?'Admin':'Agent';r.className='role-tag'+(isAdmin()?' admin':'');
-  $('hello').textContent='Bonjour '+(parts[0]||'')+', nouvelle demande ?';
+  $('hello').textContent=t('Bonjour {name}, nouvelle demande ?',{name:parts[0]||''});
 }
 $('who-out').addEventListener('click',async()=>{
   logout('Déconnecté')
@@ -681,11 +802,11 @@ $('taa-form').addEventListener('submit',async e=>{
   try{
     const {data,error}=await call('connexion',{p_taa:taa});
     if(error){if(error.code==='54000'){$('taa-err').textContent='Trop d’erreurs de TAA depuis ce poste. Réessayez dans 15 minutes.';return}
-      $('taa-err').textContent=isNetErr(error)?'Serveur injoignable. Vérifiez votre connexion internet.':'Connexion impossible ('+(error.message||'erreur')+').';return}
+      $('taa-err').textContent=isNetErr(error)?'Serveur injoignable. Vérifiez votre connexion internet.':t('Connexion impossible ({m}).',{m:error.message||'erreur'});return}
     if(!data){taaTries++;if(taaTries>=5){taaLockUntil=Date.now()+30000;taaTries=0}
       $('taa-err').textContent='TAA inconnu ou désactivé. Vérifiez la saisie ou contactez votre responsable.';return}
     S.agent={taa:data.taa,nom:data.nom,role:data.role};S.loaded=false;ss('tvout.agent',JSON.stringify(S.agent));taaTries=0;$('taa').value='';
-    touch();setView(S.view);toast('Bienvenue '+data.nom.split(' ')[0]);
+    touch();setView(S.view);toast(t('Bienvenue {name}',{name:data.nom.split(' ')[0]}));
   }catch(err){console.warn(err);$('taa-err').textContent='Connexion impossible. Vérifiez votre connexion internet.'}
   finally{$('taa-go').disabled=false;$('taa-go').textContent='Se connecter →'}
 });
@@ -708,14 +829,14 @@ $('reset').addEventListener('click',resetForm);
 document.addEventListener('keydown',e=>{
   if(needs(S.view)!=='saisie'||e.metaKey||e.ctrlKey||e.altKey)return;
   const tag=(e.target.tagName||'').toLowerCase();if(tag==='input'||tag==='textarea'||tag==='select')return;
-  const k=e.key.toLowerCase();if(k==='o'){F.outcome='retenu';syncForm();e.preventDefault()}else if(k==='n'){F.outcome='resilie';syncForm();e.preventDefault()}
+  const k=e.key.toLowerCase();if(k==='o'||k==='j'){F.outcome='retenu';syncForm();e.preventDefault()}else if(k==='n'){F.outcome='resilie';syncForm();e.preventDefault()}
 });
 let saving=false;
 function getQueue(){try{return JSON.parse(ls('tvout.queue')||'[]')}catch(e){return []}}
 function setQueue(q){ls('tvout.queue',JSON.stringify(q));renderQueue()}
 function renderQueue(){const q=getQueue().filter(x=>S.agent&&x.p_taa===S.agent.taa),el=$('queue-note');
   if(!q.length){el.hidden=true;return}
-  el.hidden=false;el.innerHTML=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 2"/></svg>${q.length} saisie${q.length>1?'s':''} en attente d’envoi : envoi automatique dès que la connexion revient.`}
+  el.hidden=false;el.innerHTML=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 2"/></svg>`+esc(t(q.length>1?'{n} saisies en attente d’envoi : envoi automatique dès que la connexion revient.':'1 saisie en attente d’envoi : envoi automatique dès que la connexion revient.',{n:q.length}))}
 let flushing=false;
 async function flushQueue(){
   if(flushing||!sb)return;let q=getQueue();if(!q.length){renderQueue();return}
@@ -727,7 +848,7 @@ async function flushQueue(){
     q=q.filter(x=>x!==item);setQueue(q);toast('Une saisie en attente a été refusée par le serveur');
   }
   flushing=false;renderQueue();
-  if(sent){toast(sent+' saisie'+(sent>1?'s':'')+' en attente envoyée'+(sent>1?'s':''));loadResume()}
+  if(sent){toast(t(sent>1?'{n} saisies en attente envoyées':'1 saisie en attente envoyée',{n:sent}));loadResume()}
 }
 $('form').addEventListener('submit',async e=>{
   e.preventDefault();if(saving||$('save').disabled)return;
@@ -744,7 +865,7 @@ $('form').addEventListener('submit',async e=>{
     console.warn(err);
     if(err&&(err.code==='28000'||/TAA/.test(err.message||''))){failed=true;$('form-hint').className='err';$('form-hint').textContent='Votre TAA n’est plus actif. Contactez votre responsable.';setTimeout(()=>logout(),2500)}
     else if(isNetErr(err)){const q=getQueue();q.push(payload);setQueue(q);resetForm();toast('Pas de connexion : saisie gardée, elle sera envoyée automatiquement')}
-    else{failed=true;$('form-hint').className='err';$('form-hint').textContent='Le serveur a refusé la saisie ('+(err.message||'erreur')+'). Réessayez.'}
+    else{failed=true;$('form-hint').className='err';$('form-hint').textContent=t('Le serveur a refusé la saisie ({m}). Réessayez.',{m:err.message||'erreur'})}
   }finally{saving=false;$('save').textContent='Enregistrer';if(failed)$('save').disabled=false}
 });
 async function loadResume(){
@@ -812,25 +933,25 @@ function renderDash(){
   const prev=from==null?[]:S.calls.filter(c=>c.ts>=from-(to-from)&&c.ts<from);
   const s=stats(inP),sp=stats(prev);
   const labels={today:'Aujourd’hui',7:'7 derniers jours',30:'30 derniers jours',all:'Depuis le début du pilote',custom:'Période personnalisée'};
-  $('period-label').textContent=labels[S.period]+(from!=null?' · '+new Date(from).toLocaleDateString('fr-CH',{day:'numeric',month:'long'})+' – '+new Date(Math.min(to,Date.now())).toLocaleDateString('fr-CH',{day:'numeric',month:'long'}):'')+'.';
+  $('period-label').textContent=t(labels[S.period])+(from!=null?' · '+new Date(from).toLocaleDateString(LOC(),{day:'numeric',month:'long'})+' – '+new Date(Math.min(to,Date.now())).toLocaleDateString(LOC(),{day:'numeric',month:'long'}):'')+'.';
   const C=2*Math.PI*86;$('ring-arc').setAttribute('stroke-dasharray',`${(s.p||0)*C} ${C}`);
   $('h-rate').innerHTML=s.n?`${Math.round(s.p*100)}<small>%</small>`:'–';
   const V=$('verdict');let cls='none',vt='En attente de données',ht='Aucune saisie sur cette période.',hp='Choisissez une autre période ou attendez les premières saisies.';
   const ci=wilson(s.k,s.n);
   if(s.n){
     const lo=Math.round(ci[0]*100),hi=Math.round(ci[1]*100),marg=Math.round((ci[1]-ci[0])*50);
-    ht=`${fmtPct(s.p)} des clients qui voulaient résilier restent.`;
-    if(s.n<30){cls='mid';vt='Échantillon encore petit';hp=`${s.k} abonnements TV sauvés sur ${s.n} demandes. Avec moins de 30 saisies, le vrai taux peut se situer entre ${lo} % et ${hi} % : attendez avant de conclure.`}
-    else{cls='good';vt=`Chiffre fiable · ±${marg} pts`;hp=`${s.k} abonnements TV sauvés sur ${s.n} demandes. Le vrai taux de rétention se situe entre ${lo} % et ${hi} %.`}
+    ht=t('{p} des clients qui voulaient résilier restent.',{p:fmtPct(s.p)});
+    if(s.n<30){cls='mid';vt='Échantillon encore petit';hp=t('{k} abonnements TV sauvés sur {n} demandes. Avec moins de 30 saisies, le vrai taux peut se situer entre {lo} % et {hi} % : attendez avant de conclure.',{k:s.k,n:s.n,lo,hi})}
+    else{cls='good';vt=t('Chiffre fiable · ±{m} pts',{m:marg});hp=t('{k} abonnements TV sauvés sur {n} demandes. Le vrai taux de rétention se situe entre {lo} % et {hi} %.',{k:s.k,n:s.n,lo,hi})}
     $('ci-band').style.left=ci[0]*100+'%';$('ci-band').style.width=(ci[1]-ci[0])*100+'%';$('ci-band').hidden=false;
-    $('ci-pt').style.left=s.p*100+'%';$('ci-pt').hidden=false;$('ci-text').textContent=`Fourchette 95 % : ${lo}–${hi} %`;
+    $('ci-pt').style.left=s.p*100+'%';$('ci-pt').hidden=false;$('ci-text').textContent=t('Fourchette 95 % : {lo}–{hi} %',{lo,hi});
   }else{$('ci-band').hidden=true;$('ci-pt').hidden=true;$('ci-text').textContent='Fourchette de fiabilité 95 %'}
   V.className='verdict '+cls;V.textContent=vt;$('h-title').textContent=ht;$('h-text').textContent=hp;
-  const d=(a,b,inv)=>{if(!prev.length)return '<span class="muted">pas de période de comparaison</span>';const x=a-b;if(!x)return 'stable vs période préc.';const up=inv?x<0:x>0;return `<span class="delta ${up?'up':'down'}">${x>0?'+':''}${x}</span> vs période préc.`};
+  const d=(a,b,inv)=>{if(!prev.length)return '<span class="muted">pas de période de comparaison</span>';const x=a-b;if(!x)return 'stable vs période préc.';const up=inv?x<0:x>0;return `<span class="delta ${up?'up':'down'}">${x>0?'+':''}${x}</span> `+esc(t('vs période préc.'))};
   $('k-calls').textContent=s.n;$('k-calls-d').innerHTML=d(s.n,sp.n);
   $('k-kept').textContent=s.k;$('k-kept-d').innerHTML=d(s.k,sp.k);
   $('k-lost').textContent=s.l;$('k-lost-d').innerHTML=d(s.l,sp.l,true);
-  if(s.n&&sp.n){const pp=Math.round((s.p-sp.p)*100);$('k-delta').innerHTML=`<span class="delta ${pp>0?'up':pp<0?'down':''}">${pp>0?'+':''}${pp} pts</span>`;$('k-delta-d').textContent=`${fmtPct(sp.p)} sur la période précédente`}
+  if(s.n&&sp.n){const pp=Math.round((s.p-sp.p)*100);$('k-delta').innerHTML=`<span class="delta ${pp>0?'up':pp<0?'down':''}">${esc(t('{d} pts',{d:(pp>0?'+':'')+pp}))}</span>`;$('k-delta-d').textContent=t('{p} sur la période précédente',{p:fmtPct(sp.p)})}
   else{$('k-delta').textContent='–';$('k-delta-d').textContent=from==null?'non applicable sur « Tout »':'pas de données avant'}
   renderChart(inP,from,to);renderReasons(inP);renderLevers(inP);renderAgentsPerf(inP);renderRecent(inP);
 }
@@ -850,13 +971,13 @@ function renderChart(list,from,to){
   let g='';for(let i=0;i<=4;i++){const y=yN(i*step);g+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${L-8}" y="${y+4}" text-anchor="end" font-size="11" fill="var(--fg-3)">${i*step}</text><text x="${W-R+8}" y="${y+4}" font-size="11" fill="var(--fg-3)">${i*25}%</text>`}
   let bars='',pts=[];
   days.forEach((k,i)=>{const b=by[k],x=L+i*bw+gap/2,w=Math.max(1,bw-gap),hk=b.k/yMax*ih,hl=b.l/yMax*ih,base=Tp+ih,rx=Math.min(3,w/2);
-    if(b.l)bars+=`<rect x="${x}" y="${base-hk-hl}" width="${w}" height="${hl}" rx="${rx}" fill="var(--bad)" opacity=".55"><title>${k} · ${b.l} résiliés</title></rect>`;
-    if(b.k)bars+=`<rect x="${x}" y="${base-hk}" width="${w}" height="${hk}" rx="${rx}" fill="var(--good)"><title>${k} · ${b.k} retenus</title></rect>`;
+    if(b.l)bars+=`<rect x="${x}" y="${base-hk-hl}" width="${w}" height="${hl}" rx="${rx}" fill="var(--bad)" opacity=".55"><title>${esc(t('{d} · {n} résiliés',{d:k,n:b.l}))}</title></rect>`;
+    if(b.k)bars+=`<rect x="${x}" y="${base-hk}" width="${w}" height="${hk}" rx="${rx}" fill="var(--good)"><title>${esc(t('{d} · {n} retenus',{d:k,n:b.k}))}</title></rect>`;
     const n=b.k+b.l;if(n)pts.push([L+i*bw+bw/2,yP(b.k/n),k,b.k/n,n])});
   let line='';
   if(pts.length>1)line=`<polyline points="${pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>`;
   if(pts.length){const p=pts[pts.length-1];line+=`<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2.5"/>`}
-  pts.forEach(p=>{line+=`<circle cx="${p[0]}" cy="${p[1]}" r="9" fill="transparent"><title>${p[2]} · ${Math.round(p[3]*100)} % sur ${p[4]} demandes</title></circle>`});
+  pts.forEach(p=>{line+=`<circle cx="${p[0]}" cy="${p[1]}" r="9" fill="transparent"><title>${esc(t('{d} · {p} % sur {n} demandes',{d:p[2],p:Math.round(p[3]*100),n:p[4]}))}</title></circle>`});
   let xl='';const every=Math.max(1,Math.ceil(days.length/8));
   days.forEach((k,i)=>{if(i%every===0){const [,m,d]=k.split('-');xl+=`<text x="${L+i*bw+bw/2}" y="${H-8}" text-anchor="middle" font-size="11" fill="var(--fg-3)">${+d}.${m}</text>`}});
   box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Demandes par jour et taux de rétention">${g}${bars}${line}${xl}</svg>`;
@@ -869,7 +990,7 @@ function renderReasons(list){
   const max=rows[0].n;
   el.innerHTML=rows.map(r=>`<div class="brow"><span>${esc(r.label)}</span><span class="n num"><b>${r.n}</b> · ${Math.round(r.n/tot*100)} %</span>
     <div class="btrack" style="width:${Math.max(4,r.n/max*100)}%"><div class="k" style="width:${r.p*100}%"></div><div class="l" style="flex:1"></div></div>
-    <span class="bnote num">${Math.round(r.p*100)} % retenus</span></div>`).join('');
+    <span class="bnote num">${esc(t('{p} % retenus',{p:Math.round(r.p*100)}))}</span></div>`).join('');
 }
 function renderLevers(list){
   const rows=groupRows(list.filter(c=>c.lever),'lever',LL).sort((a,b)=>b.p-a.p||b.n-a.n),el=$('levers-eff');
@@ -886,7 +1007,7 @@ function renderAgentsPerf(list){
 let pendingDel=null;
 function renderRecent(list){
   const rows=list.slice(0,25);
-  $('recent-count').textContent=list.length>25?`25 plus récentes sur ${list.length}`:`${list.length} saisie${list.length>1?'s':''}`;
+  $('recent-count').textContent=list.length>25?t('25 plus récentes sur {n}',{n:list.length}):t(list.length>1?'{n} saisies':'1 saisie',{n:list.length});
   $('recent').innerHTML=rows.length?rows.map(c=>`<tr><td class="num" style="white-space:nowrap">${fmtDate(c.ts)}</td>
     <td><span class="pill ${c.outcome==='retenu'?'yes':'no'}">${c.outcome==='retenu'?'Retenu':'Résilié'}</span></td>
     <td>${esc(RL[c.reason]||c.reason)}</td><td class="muted">${esc(LL[c.lever]||'–')}</td><td>${esc(nameOf(c))}</td>
@@ -907,8 +1028,8 @@ $('recent').addEventListener('click',async e=>{
 });
 $('export').addEventListener('click',()=>{
   const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
-  const lines=[['Date','Heure','Résultat','Motif','Levier','Agent','TAA','Remarque'].map(q).join(';')];
-  for(const c of inPeriod().slice().reverse())lines.push([dayKey(c.ts),fmtTime(c.ts),c.outcome==='retenu'?'Retenu':'Résilié',RL[c.reason]||c.reason,LL[c.lever]||'',nameOf(c),c.taa,c.note].map(q).join(';'));
+  const lines=[['Date','Heure','Résultat','Motif','Levier','Agent','TAA','Remarque'].map(x=>q(t(x))).join(';')];
+  for(const c of inPeriod().slice().reverse())lines.push([dayKey(c.ts),fmtTime(c.ts),t(c.outcome==='retenu'?'Retenu':'Résilié'),t(RL[c.reason]||c.reason),t(LL[c.lever]||''),nameOf(c),c.taa,c.note].map(q).join(';'));
   const url=URL.createObjectURL(new Blob(['﻿'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}));
   const a=document.createElement('a');a.href=url;a.download=`pilote-tv-out-${dayKey(Date.now())}.csv`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
@@ -921,25 +1042,25 @@ async function renderDiag(){
   const last=S.agents.map(x=>x.derniere).filter(Boolean).sort().pop();
   $('d-total').textContent=tot;$('d-last').textContent=last?fmtDate(Date.parse(last)):'aucune';
   const p=await ping();
-  $('d-status').innerHTML=p.ok?'<span style="color:var(--good)">● Connectée</span>':'<span style="color:var(--bad)">● Injoignable</span>';
+  $('d-status').innerHTML=p.ok?'<span style="color:var(--good)">'+t('● Connectée')+'</span>':'<span style="color:var(--bad)">'+t('● Injoignable')+'</span>';
   $('d-latency').textContent=p.ok?p.ms+' ms':'–';
 }
 $('d-run').addEventListener('click',async()=>{
   const ul=$('d-steps'),btn=$('d-run');ul.hidden=false;btn.disabled=true;
-  const steps=[['Écriture d’une saisie test dans la base'],['Relecture de la saisie depuis la base'],['Suppression de la saisie test']];
+  const steps=[[t('Écriture d’une saisie test dans la base')],[t('Relecture de la saisie depuis la base')],[t('Suppression de la saisie test')]];
   const draw=st=>{ul.innerHTML=steps.map((x,i)=>`<li class="${st[i]||''}"><i>${st[i]==='ok'?'✓':st[i]==='ko'?'!':i+1}</i>${x[0]}${x[1]?' · <span class="muted">'+esc(x[1])+'</span>':''}</li>`).join('')};
   const st=[];draw(st);
   const t0=performance.now();
   const w=await call('enregistrer_saisie',{p_taa:S.agent.taa,p_resultat:'retenu',p_motif:'autre',p_levier:'',p_remarque:'[TEST AUTOMATIQUE]'});
-  if(w.error||!w.data||!w.data.id){st[0]='ko';steps[0][1]=(w.error&&w.error.message)||'pas d’identifiant';draw(st);btn.disabled=false;return}
+  if(w.error||!w.data||!w.data.id){st[0]='ko';steps[0][1]=(w.error&&w.error.message)||t('pas d’identifiant');draw(st);btn.disabled=false;return}
   st[0]='ok';steps[0][1]=Math.round(performance.now()-t0)+' ms';draw(st);
   const id=w.data.id;
   const r=await call('admin_saisies',{p_taa:S.agent.taa,p_depuis:new Date(Date.now()-10*60e3).toISOString()});
   const found=!r.error&&(r.data||[]).find(x=>x.id===id);
-  if(!found){st[1]='ko';steps[1][1]='saisie introuvable';draw(st)}
-  else{st[1]='ok';steps[1][1]='enregistrée à '+fmtTime(Date.parse(found.created_at))+' au nom de '+found.agent_nom;draw(st)}
+  if(!found){st[1]='ko';steps[1][1]=t('saisie introuvable');draw(st)}
+  else{st[1]='ok';steps[1][1]=t('enregistrée à {t} au nom de {n}',{t:fmtTime(Date.parse(found.created_at)),n:found.agent_nom});draw(st)}
   const d=await call('admin_supprimer_saisie',{p_taa:S.agent.taa,p_id:id});
-  if(d.error||!d.data){st[2]='ko';steps[2][1]='à supprimer à la main (remarque « [TEST AUTOMATIQUE] »)'}else st[2]='ok';
+  if(d.error||!d.data){st[2]='ko';steps[2][1]=t('à supprimer à la main (remarque « [TEST AUTOMATIQUE] »)')}else st[2]='ok';
   draw(st);btn.disabled=false;
   toast(st.every(x=>x==='ok')?'Test réussi : les saisies sont bien enregistrées':'Test en échec : voir le détail');
   loadAdminData();
@@ -965,14 +1086,14 @@ function renderAdmin(){
     :`<tr><td colspan="7" class="muted">${A.length?'Aucun agent ne correspond à la recherche.':'Aucun agent. Ajoutez le premier ci-dessus.'}</td></tr>`;
 }
 $('a-search').addEventListener('input',renderAdmin);
-function dbErr(error){const mm=(error&&error.message)||'';if(/admin actif|propre compte|réservé|obligatoires|TAA invalide/.test(mm))return mm+'.';const m=(error&&(error.message||''))+'';if(error&&error.code==='23505'||/duplicate/.test(m))return 'Ce TAA existe déjà.';if(/check/.test(m))return 'Format invalide : TAA en lettres et chiffres (4 à 20), nom de 2 à 80 caractères.';return 'Opération impossible. Vérifiez la connexion et vos droits.'}
+function dbErr(error){const mm=(error&&error.message)||'';if(/admin actif|propre compte|réservé|obligatoires|TAA invalide/.test(mm))return t(mm.replace(/\.$/,'')+'.');const m=(error&&(error.message||''))+'';if(error&&error.code==='23505'||/duplicate/.test(m))return 'Ce TAA existe déjà.';if(/check/.test(m))return 'Format invalide : TAA en lettres et chiffres (4 à 20), nom de 2 à 80 caractères.';return 'Opération impossible. Vérifiez la connexion et vos droits.'}
 $('add-taa').addEventListener('input',()=>{$('add-taa').value=$('add-taa').value.toUpperCase();$('add-err').textContent=''});
 ['add-prenom','add-nom'].forEach(id=>$(id).addEventListener('input',()=>{$('add-err').textContent=''}));
 $('add-form').addEventListener('submit',async e=>{
   e.preventDefault();
   const taa=normTaa($('add-taa').value),prenom=$('add-prenom').value.trim().replace(/\s+/g,' '),nom=$('add-nom').value.trim().replace(/\s+/g,' ');
   const miss=[];if(!prenom)miss.push('prénom');if(!nom)miss.push('nom');if(!taa)miss.push('TAA');
-  if(miss.length){$('add-err').textContent='Champs obligatoires manquants : '+miss.join(', ')+'.';return}
+  if(miss.length){$('add-err').textContent=t('Champs obligatoires manquants : {f}.',{f:miss.map(x=>t(x)).join(', ')});return}
   if(!/^[A-Z0-9]{4,20}$/.test(taa)){$('add-err').textContent='Le TAA doit contenir 4 à 20 lettres ou chiffres.';return}
   $('add-go').disabled=true;
   const {error}=await call('admin_enregistrer_agent',{p_taa:S.agent.taa,p_ancien_taa:'',p_nouveau_taa:taa,p_prenom:prenom,p_nom:nom,p_role:$('add-role').value,p_actif:true});
@@ -980,7 +1101,7 @@ $('add-form').addEventListener('submit',async e=>{
   if(error){$('add-err').textContent=dbErr(error);return}
   const role=$('add-role').value;
   $('add-taa').value='';$('add-prenom').value='';$('add-nom').value='';$('add-role').value='agent';$('add-err').textContent='';
-  toast(prenom+' '+nom+' ajouté'+(role==='admin'?' comme admin':''));loadAdminData();
+  toast(t(role==='admin'?'{name} ajouté comme admin':'{name} ajouté',{name:prenom+' '+nom}));loadAdminData();
 });
 $('bulk-go').addEventListener('click',async()=>{
   const lines=$('bulk').value.split('\n').map(l=>l.trim()).filter(Boolean);const rows=[],bad=[];
@@ -991,7 +1112,7 @@ $('bulk-go').addEventListener('click',async()=>{
   const {error}=await call('admin_importer',{p_taa:S.agent.taa,p_lignes:rows});
   $('bulk-go').disabled=false;
   if(error){$('bulk-hint').textContent=dbErr(error);return}
-  $('bulk-hint').textContent=`${rows.length} agent${rows.length>1?'s':''} importé${rows.length>1?'s':''}`+(bad.length?` · ${bad.length} ligne${bad.length>1?'s':''} ignorée${bad.length>1?'s':''}`:'');
+  $('bulk-hint').textContent=t('{n} utilisateur(s) importé(s)',{n:rows.length})+(bad.length?t(' · {b} ligne(s) ignorée(s)',{b:bad.length}):'');
   if(!bad.length)$('bulk').value='';else $('bulk').value=bad.join('\n');
   loadAdminData();
 });
@@ -1013,12 +1134,12 @@ $('a-list').addEventListener('click',async e=>{
     if(taa===S.agent.taa&&a.actif){toast('Vous ne pouvez pas désactiver votre propre compte');return}
     const {error}=await call('admin_enregistrer_agent',{p_taa:S.agent.taa,p_ancien_taa:taa,p_nouveau_taa:taa,p_prenom:a.prenom||a.nom,p_nom:a.prenom?a.nom:a.nom,p_role:a.role,p_actif:!a.actif});
     if(error){toast(dbErr(error));return}
-    toast(a.actif?a.nom_complet+' désactivé':a.nom_complet+' réactivé');loadAdminData();return}
+    toast(t(a.actif?'{name} désactivé':'{name} réactivé',{name:a.nom_complet}));loadAdminData();return}
   if(act==='del'){
     if(armed!==taa){armed=taa;renderAdmin();return}
     armed=null;const {error}=await call('admin_supprimer_agent',{p_taa:S.agent.taa,p_cible:taa});
     if(error){toast(dbErr(error));return}
-    toast(a.nom_complet+' supprimé · ses saisies sont conservées');loadAdminData();
+    toast(t('{name} supprimé · ses saisies sont conservées',{name:a.nom_complet}));loadAdminData();
   }
 });
 document.addEventListener('click',e=>{
@@ -1029,15 +1150,26 @@ document.addEventListener('click',e=>{
 /* =================== Toast & démarrage =================== */
 let tt;function toast(m){const t=$('toast');t.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'+esc(m);t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2400)}
 
+function setLang(l){
+  LANG=l==='de'?'de':'fr';try{localStorage.setItem('tvout.lang',LANG)}catch(e){}
+  document.documentElement.lang=LANG;
+  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===LANG));
+  trNode(document.body);
+  $('page-date').textContent=new Date().toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long'});
+  if(S.agent){renderWho();renderQueue();renderToday();syncForm();render();renderDiag()}
+  const sh=needs(S.view);if(TITLES[sh])document.title=t(TITLES[sh])+' · Pilote TV Out';
+}
+document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
 syncPeriod();syncForm();
 let lastAct=Date.now();function touch(){lastAct=Date.now()}
 ['click','keydown','pointermove','touchstart'].forEach(ev=>document.addEventListener(ev,touch,{passive:true}));
 setInterval(()=>{if(S.agent&&Date.now()-lastAct>45*60e3)logout('Déconnexion automatique après 45 minutes d’inactivité')},30000);
 window.addEventListener('online',()=>{flushQueue();if(isAdmin())loadAdminData()});
 setInterval(flushQueue,20000);
-$('page-date').textContent=new Date().toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long'});
+$('page-date').textContent=new Date().toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long'});
 const start=(location.hash||'').replace('#','');
 (async()=>{
+  setLang(LANG);
   setView(['dashboard','admin'].includes(start)?start:'saisie');
   setInterval(()=>{if(document.hidden)return;if(needs(S.view)==='saisie'){loadResume();renderToday()}},60000);
   setInterval(()=>{if(!document.hidden&&isAdmin()&&S.view!=='saisie')loadAdminData()},20000);
