@@ -393,6 +393,9 @@ details.bulk[open] summary{margin-bottom:12px}
 .more-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;flex-wrap:wrap}
 .more-row p{margin:0}
 @media (max-width:900px){.toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
+.label .req{color:var(--bad);font-weight:700}
+.chip[aria-pressed="true"]:hover{color:#fff;background:#123172;border-color:#123172}
+.chip[aria-pressed="true"]::before{content:"✓ ";font-weight:700}
 </style>
 
 <script src="config.js"></script>
@@ -496,7 +499,7 @@ details.bulk[open] summary{margin-bottom:12px}
               <div class="select-wrap"><select id="reason" required></select></div>
             </div>
             <div class="field">
-              <div class="label">Levier proposé <span class="opt">optionnel</span></div>
+              <div class="label">Levier(s) proposé(s) <span class="req">*</span> <span class="opt">obligatoire · plusieurs choix possibles</span></div>
               <div class="chips" id="levers" role="group" aria-label="Levier proposé"></div>
             </div>
             <div class="field">
@@ -716,7 +719,7 @@ const DE={
 "Déménagement":"Umzug","Changement de ménage / décès":"Haushaltsänderung / Todesfall","Autre motif":"Anderer Grund",
 "Remise temporaire":"Befristeter Rabatt","Abonnement plus léger":"Günstigeres Abo","Option / contenu offert":"Option / Inhalt geschenkt","Résolution technique":"Technische Lösung",
 "Offre combinée":"Kombiangebot","Aucun levier":"Keine Massnahme","Choisir un motif…":"Grund wählen…",
-"Choisissez le motif.":"Wählen Sie den Grund.","Prêt · touche Entrée pour enregistrer":"Bereit · Enter zum Speichern",
+"Choisissez le motif.":"Wählen Sie den Grund.","Choisissez au moins un levier proposé.":"Wählen Sie mindestens eine angebotene Massnahme.","Levier(s) proposé(s)":"Angebotene Massnahme(n)","obligatoire · plusieurs choix possibles":"Pflicht · Mehrfachauswahl möglich","obligatoire":"Pflicht","Prêt · touche Entrée pour enregistrer":"Bereit · Enter zum Speichern",
 "Trop d’essais. Patientez quelques secondes.":"Zu viele Versuche. Bitte warten Sie einige Sekunden.","Saisissez votre identifiant TAA complet.":"Geben Sie Ihre vollständige TAA-Kennung ein.",
 "Vérification…":"Überprüfung…","Trop d’erreurs de TAA depuis ce poste. Réessayez dans 15 minutes.":"Zu viele falsche TAA von diesem Arbeitsplatz. Versuchen Sie es in 15 Minuten erneut.",
 "Serveur injoignable. Vérifiez votre connexion internet.":"Server nicht erreichbar. Prüfen Sie Ihre Internetverbindung.",
@@ -925,20 +928,22 @@ $('taa-form').addEventListener('submit',async e=>{
   finally{$('taa-go').disabled=false;$('taa-go').textContent='Se connecter →'}
 });
 /* =================== Saisie =================== */
-const F={outcome:null,lever:''};
+const F={outcome:null,levers:new Set()};
 $('reason').innerHTML='<option value="">Choisir un motif…</option>'+REASONS.map(r=>`<option value="${r.id}">${esc(r.label)}</option>`).join('');
 $('levers').innerHTML=LEVERS.map(l=>`<button type="button" class="chip" aria-pressed="false" data-lever="${l.id}">${esc(l.label)}</button>`).join('');
 function syncForm(){
   $('oc-yes').setAttribute('aria-pressed',F.outcome==='retenu');$('oc-no').setAttribute('aria-pressed',F.outcome==='resilie');
-  document.querySelectorAll('[data-lever]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lever===F.lever));
-  $('save').disabled=!(sb&&S.agent&&F.outcome&&$('reason').value);
+  document.querySelectorAll('[data-lever]').forEach(b=>b.setAttribute('aria-pressed',F.levers.has(b.dataset.lever)));
+  $('save').disabled=!(sb&&S.agent&&F.outcome&&$('reason').value&&F.levers.size>0);
   $('form-hint').className='hint';
-  $('form-hint').textContent=!F.outcome?'Le client est-il retenu ?':!$('reason').value?'Choisissez le motif.':'Prêt · touche Entrée pour enregistrer';
+  $('form-hint').textContent=!F.outcome?'Le client est-il retenu ?':!$('reason').value?'Choisissez le motif.':!F.levers.size?'Choisissez au moins un levier proposé.':'Prêt · touche Entrée pour enregistrer';
 }
 document.querySelectorAll('[data-outcome]').forEach(b=>b.addEventListener('click',()=>{F.outcome=b.dataset.outcome;syncForm();$('reason').focus()}));
-$('levers').addEventListener('click',e=>{const b=e.target.closest('[data-lever]');if(!b)return;F.lever=F.lever===b.dataset.lever?'':b.dataset.lever;syncForm()});
+$('levers').addEventListener('click',e=>{const b=e.target.closest('[data-lever]');if(!b)return;const id=b.dataset.lever;
+  if(F.levers.has(id))F.levers.delete(id);else{if(id==='aucun')F.levers.clear();else F.levers.delete('aucun');F.levers.add(id)}
+  syncForm()});
 $('reason').addEventListener('change',syncForm);
-function resetForm(){F.outcome=null;F.lever='';$('reason').value='';$('note').value='';syncForm()}
+function resetForm(){F.outcome=null;F.levers=new Set();$('reason').value='';$('note').value='';syncForm()}
 $('reset').addEventListener('click',resetForm);
 document.addEventListener('keydown',e=>{
   if(needs(S.view)!=='saisie'||e.metaKey||e.ctrlKey||e.altKey)return;
@@ -967,7 +972,7 @@ async function flushQueue(){
 $('form').addEventListener('submit',async e=>{
   e.preventDefault();if(saving||$('save').disabled)return;
   saving=true;$('save').disabled=true;$('save').textContent='Enregistrement…';let failed=false;
-  const payload={p_taa:S.agent.taa,p_resultat:F.outcome,p_motif:$('reason').value,p_levier:F.lever||'',p_remarque:$('note').value.trim().slice(0,280)};
+  const payload={p_taa:S.agent.taa,p_resultat:F.outcome,p_motif:$('reason').value,p_levier:LEVERS.map(l=>l.id).filter(id=>F.levers.has(id)).join(','),p_remarque:$('note').value.trim().slice(0,280)};
   const kept=F.outcome==='retenu';
   try{
     const {data,error}=await call('enregistrer_saisie',payload);
@@ -1018,7 +1023,7 @@ function periodBounds(){
   return {from,to};
 }
 function fetchSince(){const {from,to}=periodBounds();if(from==null)return 0;return Math.min(from-(to-from),startOfDay(Date.now()))}
-const mapRow=r=>({id:r.id,ts:Date.parse(r.created_at),outcome:r.resultat,reason:r.motif,lever:r.levier||'',taa:r.agent_taa||'',nom:r.agent_nom,note:r.remarque||''});
+const mapRow=r=>({id:r.id,ts:Date.parse(r.created_at),outcome:r.resultat,reason:r.motif,levers:(r.levier||'').split(',').filter(Boolean),taa:r.agent_taa||'',nom:r.agent_nom,note:r.remarque||''});
 let loading=false,again=false;
 async function loadAdminData(){
   if(!isAdmin()||!sb)return;
@@ -1114,6 +1119,8 @@ function renderDash(){
   renderInsights(inP);renderChart(ser);renderWeekly(inP);renderHeat(inP);
   renderReasons(inP);renderLevers(inP);renderMatrix(inP);renderAgentsPerf(inP);renderRecent(inP);
 }
+const levLabel=c=>c.levers.map(l=>t(LL[l]||l)).join(' + ');
+function leverRows(list,{skipNone}={}){return LEVERS.filter(l=>!(skipNone&&l.id==='aucun')).map(l=>{const sub=list.filter(c=>c.levers.includes(l.id));const k=sub.filter(c=>c.outcome==='retenu').length;return {id:l.id,label:l.label,n:sub.length,k,p:sub.length?k/sub.length:0}}).filter(r=>r.n)}
 const ICONS={
   top:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7"/><rect x="12" y="6" width="3" height="11"/><rect x="17" y="13" width="3" height="4"/></svg>',
   save:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>',
@@ -1126,7 +1133,7 @@ const WD=()=>LANG==='de'?['Mo','Di','Mi','Do','Fr','Sa','So']:['Lu','Ma','Me','J
 const WDL=()=>LANG==='de'?['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag']:['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
 function computeInsights(list){
   const out=[];if(!list.length)return out;
-  const reasons=groupRows(list,'reason',RL),levers=groupRows(list.filter(c=>c.lever&&c.lever!=='aucun'),'lever',LL);
+  const reasons=groupRows(list,'reason',RL),levers=leverRows(list,{skipNone:true});
   const r0=reasons[0];out.push({cls:'',ic:'top',k:t('Motif le plus fréquent'),v:t(r0.label),m:t('{p} des demandes',{p:Math.round(r0.n/list.length*100)+' %'})});
   const rs=reasons.filter(r=>r.n>=5).sort((a,b)=>b.p-a.p);
   if(rs.length){out.push({cls:'good',ic:'save',k:t('Motif le plus souvent sauvé'),v:t(rs[0].label),m:t('{p} retenus sur {n}',{p:Math.round(rs[0].p*100)+' %',n:rs[0].n})});
@@ -1206,16 +1213,16 @@ function renderReasons(list){
     <span class="bnote num">${esc(t('{p} % retenus',{p:Math.round(r.p*100)}))}</span></div>`).join('');
 }
 function renderLevers(list){
-  const rows=groupRows(list.filter(c=>c.lever),'lever',LL).sort((a,b)=>b.p-a.p||b.n-a.n),el=$('levers-eff');
+  const rows=leverRows(list).sort((a,b)=>b.p-a.p||b.n-a.n),el=$('levers-eff');
   if(!rows.length){el.innerHTML='<p class="empty-note">Aucun levier renseigné sur cette période.</p>';return}
   el.innerHTML=rows.map(r=>`<div class="brow"><span>${esc(r.label)}</span><span class="n num"><b>${Math.round(r.p*100)} %</b> · ${r.k}/${r.n}</span>
     <div class="btrack"><div class="k" style="width:${r.p*100}%;background:var(--brand-2)"></div></div>
     ${r.n<10?'<span class="bnote">Moins de 10 essais : à confirmer</span>':''}</div>`).join('');
 }
 function matrixData(list){
-  const levs=LEVERS.map(l=>l.id).filter(id=>list.some(c=>c.lever===id));
+  const levs=LEVERS.map(l=>l.id).filter(id=>list.some(c=>c.levers.includes(id)));
   const rs=groupRows(list,'reason',RL);
-  return {levs,rows:rs.map(r=>({...r,cells:levs.map(l=>{const sub=list.filter(c=>c.reason===r.id&&c.lever===l);const k=sub.filter(c=>c.outcome==='retenu').length;return {n:sub.length,k,p:sub.length?k/sub.length:null}})}))};
+  return {levs,rows:rs.map(r=>({...r,cells:levs.map(l=>{const sub=list.filter(c=>c.reason===r.id&&c.levers.includes(l));const k=sub.filter(c=>c.outcome==='retenu').length;return {n:sub.length,k,p:sub.length?k/sub.length:null}})}))};
 }
 function renderMatrix(list){
   const el=$('matrix');const {levs,rows}=matrixData(list);
@@ -1234,13 +1241,13 @@ function renderAgentsPerf(list){
 }
 let pendingDel=null;
 function renderRecent(list){
-  const q=S.rq;const f=q?list.filter(c=>(nameOf(c)+' '+(c.taa||'')+' '+t(RL[c.reason]||'')+' '+t(LL[c.lever]||'')+' '+(c.note||'')).toLowerCase().includes(q)):list;
+  const q=S.rq;const f=q?list.filter(c=>(nameOf(c)+' '+(c.taa||'')+' '+t(RL[c.reason]||'')+' '+levLabel(c)+' '+(c.note||'')).toLowerCase().includes(q)):list;
   const lim=S.rLimit||15;const rows=f.slice(0,lim);
   $('recent-count').textContent=f.length>lim?t('{a} sur {n} saisies',{a:lim,n:f.length}):t(f.length>1?'{n} saisies':'1 saisie',{n:f.length});
   $('r-more').hidden=f.length<=lim;
   $('recent').innerHTML=rows.length?rows.map(c=>`<tr><td class="num" style="white-space:nowrap">${fmtDate(c.ts)}</td>
     <td><span class="pill ${c.outcome==='retenu'?'yes':'no'}">${c.outcome==='retenu'?'Retenu':'Résilié'}</span></td>
-    <td>${esc(RL[c.reason]||c.reason)}</td><td class="muted">${esc(LL[c.lever]||'–')}</td><td>${esc(nameOf(c))}</td>
+    <td>${esc(RL[c.reason]||c.reason)}</td><td class="muted">${esc(levLabel(c)||'–')}</td><td>${esc(nameOf(c))}</td>
     <td class="muted" style="max-width:240px">${esc(c.note)}</td>
     <td class="r"><button class="del${pendingDel===c.id?' confirm':''}" data-del="${esc(c.id)}">${pendingDel===c.id?'Confirmer':'Supprimer'}</button></td></tr>`).join('')
     :'<tr><td colspan="7" class="muted">Aucune saisie sur cette période.</td></tr>';
@@ -1260,7 +1267,7 @@ function download(blob,name){const url=URL.createObjectURL(blob);const a=documen
 $('export').addEventListener('click',()=>{
   const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
   const lines=[['Date','Heure','Résultat','Motif','Levier','Agent','TAA','Remarque'].map(x=>q(t(x))).join(';')];
-  for(const c of inPeriod().slice().reverse())lines.push([dayKey(c.ts),fmtTime(c.ts),t(c.outcome==='retenu'?'Retenu':'Résilié'),t(RL[c.reason]||c.reason),t(LL[c.lever]||''),nameOf(c),c.taa,c.note].map(q).join(';'));
+  for(const c of inPeriod().slice().reverse())lines.push([dayKey(c.ts),fmtTime(c.ts),t(c.outcome==='retenu'?'Retenu':'Résilié'),t(RL[c.reason]||c.reason),levLabel(c),nameOf(c),c.taa,c.note].map(q).join(';'));
   download(new Blob(['﻿'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}),`pilote-tv-out-${dayKey(Date.now())}.csv`);
 });
 
@@ -1342,14 +1349,14 @@ function buildReport(){
   table(t('Par motif'),t('Motifs de résiliation'),[t('Motif'),t('Demandes'),t('Part des demandes'),t('Retenus'),t('Taux de rétention')],
     groupRows(list,'reason',RL).map(x=>[t(x.label),x.n,x.n/list.length,x.k,x.p]),{fmt:{1:int,2:pct,3:int,4:pct},rateCol:4,widths:[40,12,18,12,18]});
   table(t('Par levier'),t('Efficacité des leviers'),[t('Levier'),t('Proposé'),t('Retenus'),t('Taux de succès')],
-    groupRows(list.filter(c=>c.lever),'lever',LL).sort((a,b)=>b.p-a.p).map(x=>[t(x.label),x.n,x.k,x.p]),{fmt:{1:int,2:int,3:pct},rateCol:3,widths:[30,12,12,16]});
+    leverRows(list).sort((a,b)=>b.p-a.p).map(x=>[t(x.label),x.n,x.k,x.p]),{fmt:{1:int,2:int,3:pct},rateCol:3,widths:[30,12,12,16]});
   const md=matrixData(list);
   table(t('Motif x Levier'),t('Quel levier pour quel motif ?'),[t('Motif'),...md.levs.map(l=>t(LL[l]))],
     md.rows.map(rw=>[t(rw.label),...rw.cells.map(c=>c.n?c.p:'')]),{fmt:Object.fromEntries(md.levs.map((_,i)=>[i+1,pct])),widths:[40,...md.levs.map(()=>18)]});
   table(t('Par agent'),t('Performance par agent'),['#',t('Agent'),'TAA',t('Demandes'),t('Part'),t('Retenus'),t('Taux de rétention'),t('Motif principal'),t('Dernière saisie')],
     agentRows(list).map((x,i)=>[i+1,nameOf(x.c),x.c.taa||'',x.n,x.n/list.length,x.k,x.p,t(RL[x.top]||x.top),fmtDate(x.last)]),{fmt:{3:int,4:pct,5:int,6:pct},rateCol:6,widths:[5,28,12,11,9,10,16,34,18]});
   table(t('Détail'),t('Toutes les saisies'),[t('Date'),t('Heure'),t('Résultat'),t('Motif'),t('Levier'),t('Agent'),'TAA',t('Remarque')],
-    list.slice().reverse().map(c=>[new Date(c.ts).toLocaleDateString(LOC(),{day:'2-digit',month:'2-digit',year:'numeric'}),fmtTime(c.ts),t(c.outcome==='retenu'?'Retenu':'Résilié'),t(RL[c.reason]||c.reason),t(LL[c.lever]||''),nameOf(c),c.taa||'',c.note||'']),{widths:[12,8,11,36,26,26,12,40]});
+    list.slice().reverse().map(c=>[new Date(c.ts).toLocaleDateString(LOC(),{day:'2-digit',month:'2-digit',year:'numeric'}),fmtTime(c.ts),t(c.outcome==='retenu'?'Retenu':'Résilié'),t(RL[c.reason]||c.reason),levLabel(c),nameOf(c),c.taa||'',c.note||'']),{widths:[12,8,11,36,26,26,12,40]});
   // colour the result column in detail
   const det=wb.Sheets[t('Détail').slice(0,31)];
   for(const ref in det){if(ref[0]==='C'&&det[ref].v===t('Retenu'))det[ref].s={...det[ref].s,font:font({bold:true,color:{rgb:GOOD}})};if(ref[0]==='C'&&det[ref].v===t('Résilié'))det[ref].s={...det[ref].s,font:font({bold:true,color:{rgb:BAD}})}}
@@ -1373,7 +1380,7 @@ $('d-run').addEventListener('click',async()=>{
   const draw=st=>{ul.innerHTML=steps.map((x,i)=>`<li class="${st[i]||''}"><i>${st[i]==='ok'?'✓':st[i]==='ko'?'!':i+1}</i>${x[0]}${x[1]?' · <span class="muted">'+esc(x[1])+'</span>':''}</li>`).join('')};
   const st=[];draw(st);
   const t0=performance.now();
-  const w=await call('enregistrer_saisie',{p_taa:S.agent.taa,p_resultat:'retenu',p_motif:'autre',p_levier:'',p_remarque:'[TEST AUTOMATIQUE]'});
+  const w=await call('enregistrer_saisie',{p_taa:S.agent.taa,p_resultat:'retenu',p_motif:'autre',p_levier:'aucun',p_remarque:'[TEST AUTOMATIQUE]'});
   if(w.error||!w.data||!w.data.id){st[0]='ko';steps[0][1]=(w.error&&w.error.message)||t('pas d’identifiant');draw(st);btn.disabled=false;return}
   st[0]='ok';steps[0][1]=Math.round(performance.now()-t0)+' ms';draw(st);
   const id=w.data.id;
